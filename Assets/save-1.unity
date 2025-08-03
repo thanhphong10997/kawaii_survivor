@@ -9604,7 +9604,7 @@ MonoBehaviour:
   enemyRenderer: {fileID: 451304789}
   spawnIndicator: {fileID: 1243581799}
   playerDetectionRadius: 1.2
-  moveSpeed: 0
+  moveSpeed: 2
   scaleValue: 1.2
   passAwayParticle: {fileID: 1537848114}
   showGizmos: 0
@@ -14811,6 +14811,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2144419992}
     m_Modifications:
+    - target: {fileID: 1127573995105584540, guid: 10090517b0ea82a4fa4ec5dc6d9e630d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d096262e225a5c94daedba9857eaaf16, type: 3}
     - target: {fileID: 1127573995105584540, guid: 10090517b0ea82a4fa4ec5dc6d9e630d, type: 3}
       propertyPath: m_Color.a
       value: 0.078431375

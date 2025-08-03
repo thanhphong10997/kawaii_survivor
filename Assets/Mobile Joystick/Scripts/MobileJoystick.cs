@@ -48,7 +48,7 @@ public class MobileJoystick : MonoBehaviour
     private void OnEnable()
     {
         // RẤT QUAN TRỌNG: KÍCH HOẠT CÁC ACTION MAP KHI COMPONENT ĐƯỢC BẬT
-        Debug.Log("OnEnable: Kích hoạt Input Actions.");
+        // Debug.Log("OnEnable: Kích hoạt Input Actions.");
         playerControls.Controller.Enable();
         // Đảm bảo Action Map "Controller" của bạn đang được bật
     }

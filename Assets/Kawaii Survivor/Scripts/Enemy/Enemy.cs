@@ -90,7 +90,7 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log("Attack");
+        player.TakeDamage(damage);
 
         attackTimer = 0;
     }

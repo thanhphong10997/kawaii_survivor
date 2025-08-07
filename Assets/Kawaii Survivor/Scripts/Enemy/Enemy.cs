@@ -100,11 +100,6 @@ public class Enemy : MonoBehaviour
         attackTimer += Time.deltaTime;
     }
 
-    public Player StorePlayer()
-    {
-        return player;
-    }
-
     private void PassAwayEffect()
     {
         // unparent the passAway component from Enemy component

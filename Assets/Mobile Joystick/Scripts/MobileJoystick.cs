@@ -71,7 +71,7 @@ public class MobileJoystick : MonoBehaviour
     {
 
         // clickedPosition = Input.mousePosition;
-        Debug.Log(currentMousePosition);
+        // Debug.Log(currentMousePosition);
         clickedPosition = currentMousePosition;
         // Đảm bảo joystickOutline đã được gán trong Inspector
         if (joystickOutline != null)
@@ -79,7 +79,7 @@ public class MobileJoystick : MonoBehaviour
             // Nếu joystickOutline là UI element, bạn cần chuyển đổi vị trí từ Screen Space sang Canvas Space
             // hoặc đơn giản gán trực tiếp nếu Canvas của bạn được cấu hình Screen Space - Overlay
             joystickOutline.position = clickedPosition;
-            Debug.Log("Joystick Outline moved to: " + joystickOutline.position);
+            // Debug.Log("Joystick Outline moved to: " + joystickOutline.position);
         }
         else
         {

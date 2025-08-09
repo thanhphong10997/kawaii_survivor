@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyMovement))]
@@ -14,6 +16,7 @@ public class Enemy : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float scaleValue;
     [SerializeField] private float playerDetectionRadius;
+    [SerializeField] private int maxHealth;
 
     [Header("Effects")]
     [SerializeField] private ParticleSystem passAwayParticle;
@@ -21,15 +24,22 @@ public class Enemy : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private int damage;
     [SerializeField] private float attackFrequency;
-    private float attackTimer;
-    private float attackDelay;
+    [SerializeField] private TextMeshPro healthText;
+
+    [Header("Actions")]
+    public static Action<int, Vector2> onDamageTaken;
 
     [Header("Debug")]
     [SerializeField] private bool showGizmos;
 
+    private int health;
+    private float attackTimer;
+    private float attackDelay;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        health = maxHealth;
         enemyMovement = GetComponent<EnemyMovement>();
         // Tìm GameObject đầu tiên có component Player
         player = FindFirstObjectByType<Player>();
@@ -91,13 +101,27 @@ public class Enemy : MonoBehaviour
     private void Attack()
     {
         player.TakeDamage(damage);
-
         attackTimer = 0;
     }
 
     private void Wait()
     {
         attackTimer += Time.deltaTime;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        int realDamage = Mathf.Min(damage, health);
+        health -= realDamage;
+
+        // call onDamageTaken action
+        onDamageTaken?.Invoke(damage, transform.position);
+
+
+        healthText.text = health.ToString();
+
+        if (health <= 0) PassAwayEffect();
+
     }
 
     private void PassAwayEffect()

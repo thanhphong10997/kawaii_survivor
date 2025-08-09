@@ -31,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
         // Lý do sử dụng Mathf.Min: Nếu health còn ít hơn lượng damage gây ra thì health = health - health = 0 => health sẽ ko ra số âm
         int realDamage = Mathf.Min(damage, health);
         health -= realDamage;
+        Debug.Log("Health left:" + health);
         UpdateHealthUI();
 
         if (health <= 0) PassAway();

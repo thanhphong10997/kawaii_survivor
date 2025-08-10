@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     private State state;
     [Header("Elements")]
     [SerializeField] private Transform hitDetectionTransform;
-
+    [SerializeField] private BoxCollider2D hitCollider;
 
     [Header("Settings")]
     [SerializeField] private float range;
@@ -62,20 +62,27 @@ public class Weapon : MonoBehaviour
 
         if (closestEnemy != null)
         {
+            ManageAttack();
             targetUpVector = (closestEnemy.transform.position - transform.position).normalized;
-            if (attackTimer >= attackDelay)
-            {
-                StartAttack();
-                attackTimer = 0;
-            }
-            ;
+            // Giúp tâm của weapon chuyển động hướng vào địch khi tấn công
+            transform.up = targetUpVector;
         }
 
         // Lerp giúp chuyển động mượt mà hơn
+        // Nếu ko phát hiện enemy nào gần thì tâm của weapon sẽ chuyển động hướng lên trên (độ mượt phụ thuộc vào airmLerp)
         transform.up = Vector3.Lerp(transform.up, targetUpVector, aimLerp * Time.deltaTime);
 
         // Wait a delay time then attack the enemy
         Wait();
+    }
+
+    private void ManageAttack()
+    {
+        if (attackTimer >= attackDelay)
+        {
+            StartAttack();
+            attackTimer = 0;
+        }
     }
 
     private Enemy GetClosestEnemy()
@@ -102,7 +109,11 @@ public class Weapon : MonoBehaviour
 
     private void Attack()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(hitDetectionTransform.position, hitRadius, enemyMask);
+        // Tìm tất cả các Collider chồng lấn lên vòng tròn ảo được tạo ra từ bán kính (hitRadius) và có layer: enemyMask tính từ vị trí weapon
+        // Collider2D[] enemies = Physics2D.OverlapCircleAll(hitDetectionTransform.position, hitRadius, enemyMask);
+
+        // Tìm tất cả các Collider chồng lấn nằm trong phạm vi kích thước hình hộp được tạo ra từ Box Collider có layer: enemyMask tính từ vị trí weapon
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(hitDetectionTransform.position, hitCollider.bounds.size, hitDetectionTransform.localEulerAngles.z, enemyMask);
         for (int i = 0; i < enemies.Length; i++)
         {
             Enemy currentEnemy = enemies[i].GetComponent<Enemy>();

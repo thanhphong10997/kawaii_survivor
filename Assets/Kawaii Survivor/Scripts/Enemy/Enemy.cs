@@ -29,6 +29,9 @@ public class Enemy : MonoBehaviour
     [Header("Actions")]
     public static Action<int, Vector2> onDamageTaken;
 
+    [Header("Collider")]
+    [SerializeField] private Collider2D enemyCollider;
+
     [Header("Debug")]
     [SerializeField] private bool showGizmos;
 
@@ -117,7 +120,6 @@ public class Enemy : MonoBehaviour
         // call onDamageTaken action
         onDamageTaken?.Invoke(damage, transform.position);
 
-
         healthText.text = health.ToString();
 
         if (health <= 0) PassAwayEffect();
@@ -140,6 +142,9 @@ public class Enemy : MonoBehaviour
         // enemyRenderer.enabled = true;
         // Hide spawn indicator
         // spawnIndicator.enabled = false;
+
+        // Active collider only when spawn sequence is completed to prevent attack enemy before spawning process
+        enemyCollider.enabled = true;
 
         SetRendererVisibility(true);
 

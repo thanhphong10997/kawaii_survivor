@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        if (player != null) FollowPlayer();
+        // if (player != null) FollowPlayer();
 
     }
 
@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
         this.player = player;
     }
 
-    private void FollowPlayer()
+    public void FollowPlayer()
     {
         // Nếu ko dùng normalized thì độ lớn của vector sẽ rất lớn và enemy sẽ luôn luôn di chuyển sát nhân vật
         Vector2 direction = (player.transform.position - transform.position).normalized;

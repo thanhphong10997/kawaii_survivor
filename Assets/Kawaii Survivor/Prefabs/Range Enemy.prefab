@@ -5068,7 +5068,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: bfc4e329538438b42ae6d67d1b6c0bbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5093,6 +5093,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5458039769081526843}
+--- !u!1 &6371493163318334822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3636224270903907156}
+  m_Layer: 6
+  m_Name: Shooting Point
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3636224270903907156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6371493163318334822}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.412, y: 0.326, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 766096627511745514}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6565610270431175685
 GameObject:
   m_ObjectHideFlags: 0
@@ -5280,9 +5311,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 766096627511745514}
-  - component: {fileID: 172762193465520489}
+  - component: {fileID: 2541539643827991811}
+  - component: {fileID: 742834566960764943}
   - component: {fileID: 3729376416097684622}
   - component: {fileID: 5747491440336108523}
+  - component: {fileID: 3749775364643697045}
   m_Layer: 6
   m_Name: Range Enemy
   m_TagString: Untagged
@@ -5307,9 +5340,10 @@ Transform:
   - {fileID: 1337829434800666372}
   - {fileID: 282242797545270085}
   - {fileID: 8955511730079784915}
+  - {fileID: 3636224270903907156}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &172762193465520489
+--- !u!114 &2541539643827991811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5318,13 +5352,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8746872400070407676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f88506ba2ea70f4488de99a6e54cb668, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fa5257cea038c342a5aec0264c77926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRenderer: {fileID: 5458039769081526843}
   spawnIndicator: {fileID: 1187912642070405183}
   scaleValue: 1.2
-  playerDetectionRadius: 1
+  playerDetectionRadius: 5
   maxHealth: 10
   passAwayParticle: {fileID: 2477907510438173758}
   damage: 1
@@ -5332,6 +5366,22 @@ MonoBehaviour:
   healthText: {fileID: 5531205432093197572}
   enemyCollider: {fileID: 5747491440336108523}
   showGizmos: 1
+--- !u!114 &742834566960764943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8746872400070407676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c537d212820394fb0de0a074a3e795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingPoint: {fileID: 3636224270903907156}
+  bulletPrefab: {fileID: 3232934069951737364, guid: 91ef0cc87effe7b4c9856a3cda97b263, type: 3}
+  attackFrequency: 1
+  damage: 1
 --- !u!114 &3729376416097684622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5381,3 +5431,30 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.037232816, y: 0.3534848}
   m_Radius: 0.41128784
+--- !u!50 &3749775364643697045
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8746872400070407676}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

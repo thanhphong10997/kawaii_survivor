@@ -2,8 +2,8 @@ using System;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMovement))]
-public class Enemy : MonoBehaviour
+[RequireComponent(typeof(EnemyMovement), typeof(RangeEnemyAttack))]
+public class RangeEnemy : MonoBehaviour
 {
     [Header("Elements")]
     private Player player;
@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private int damage;
     [SerializeField] private float attackFrequency;
+    private RangeEnemyAttack rangeAttack;
+
+    [Header("Health")]
     [SerializeField] private TextMeshPro healthText;
 
     [Header("Actions")]
@@ -36,16 +39,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool showGizmos;
 
     private int health;
-    private float attackTimer;
-    private float attackDelay;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         health = maxHealth;
         enemyMovement = GetComponent<EnemyMovement>();
+        rangeAttack = GetComponent<RangeEnemyAttack>();
+
         // Tìm GameObject đầu tiên có component Player
         player = FindFirstObjectByType<Player>();
+        rangeAttack.StorePlayer(player);
+
         if (player == null)
         {
             Debug.LogWarning("No player was found, destroying it...");
@@ -59,21 +64,16 @@ public class Enemy : MonoBehaviour
         // enemyRenderer.enabled = false;
         // Show spawn indicator
         // spawnIndicator.enabled = true;
-
-        // Thời gian delay sẽ bằng 1s / số lần đánh
-        attackDelay = 1f / attackFrequency;
     }
 
     // Update is called once per frame
     void Update()
     {
         // attackTimer là số giây trên mỗi Frame, khi số giây trên mỗi Frame >= số giây delay thì sẽ đánh 1 cái rồi reset attackTimer
-        if (attackTimer >= attackDelay) TryAttack();
-        else
-            Wait();
 
-        // Always follow the player
-        enemyMovement.FollowPlayer();
+        // Nếu enemy chưa đc spawn thì ko làm gì cả
+        if (!enemyRenderer.enabled) return;
+        ManageAttack();
     }
 
     private void StartSpawnSequence()
@@ -88,28 +88,21 @@ public class Enemy : MonoBehaviour
 
     }
 
-
-    private void TryAttack()
+    private void ManageAttack()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         // float magnitude = (player.transform.position - transform.position).magnitude;
         // Debug.Log("distance " + distanceToPlayer);
         // Debug.Log("magnitude " + magnitude);
 
-        // playerDectionRadius: phạm vi xung quanh enemy mà khi chạm player thì sẽ kích hoạt Attack
-        if (distanceToPlayer <= playerDetectionRadius) Attack();
-
+        if (distanceToPlayer > playerDetectionRadius) enemyMovement.FollowPlayer();
+        else TryAttack();
     }
 
-    private void Attack()
+    private void TryAttack()
     {
-        player.TakeDamage(damage);
-        attackTimer = 0;
-    }
+        rangeAttack.AutoAim();
 
-    private void Wait()
-    {
-        attackTimer += Time.deltaTime;
     }
 
     public void TakeDamage(int damage)
@@ -151,7 +144,6 @@ public class Enemy : MonoBehaviour
         // Prevent Following and Attacking during the whole spawn sequence
         // hasSpawned = true;
 
-        // Lưu player lại sau khi enemy đc spawn
         enemyMovement.StorePlayer(player);
 
     }
@@ -166,7 +158,7 @@ public class Enemy : MonoBehaviour
     {
         if (!showGizmos) return;
 
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, playerDetectionRadius);
     }
 }

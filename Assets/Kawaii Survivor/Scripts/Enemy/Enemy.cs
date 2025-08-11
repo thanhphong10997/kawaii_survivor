@@ -1,51 +1,50 @@
+using UnityEngine;
 using System;
 using TMPro;
-using UnityEngine;
 
-[RequireComponent(typeof(EnemyMovement))]
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     [Header("Elements")]
-    private Player player;
-    private EnemyMovement enemyMovement;
+    protected Player player;
+    protected EnemyMovement enemyMovement;
 
     [Header("Spawn Sequence Related")]
-    [SerializeField] private SpriteRenderer enemyRenderer;
-    [SerializeField] private SpriteRenderer spawnIndicator;
+    [SerializeField] protected SpriteRenderer enemyRenderer;
+    [SerializeField] protected SpriteRenderer spawnIndicator;
 
     [Header("Settings")]
-    [SerializeField] private float scaleValue;
-    [SerializeField] private float playerDetectionRadius;
-    [SerializeField] private int maxHealth;
+    [SerializeField] protected float scaleValue;
+    [SerializeField] protected float playerDetectionRadius;
+    [SerializeField] protected int maxHealth;
 
     [Header("Effects")]
-    [SerializeField] private ParticleSystem passAwayParticle;
+    [SerializeField] protected ParticleSystem passAwayParticle;
 
     [Header("Attack")]
-    [SerializeField] private int damage;
-    [SerializeField] private float attackFrequency;
-    [SerializeField] private TextMeshPro healthText;
+
+    [Header("Health")]
+    [SerializeField] protected TextMeshPro healthText;
+    protected int health;
 
     [Header("Actions")]
     public static Action<int, Vector2> onDamageTaken;
 
     [Header("Collider")]
-    [SerializeField] private Collider2D enemyCollider;
+    [SerializeField] protected Collider2D enemyCollider;
 
     [Header("Debug")]
-    [SerializeField] private bool showGizmos;
+    [SerializeField] protected bool showGizmos;
 
-    private int health;
-    private float attackTimer;
-    private float attackDelay;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
         health = maxHealth;
         enemyMovement = GetComponent<EnemyMovement>();
         // Tìm GameObject đầu tiên có component Player
         player = FindFirstObjectByType<Player>();
+
         if (player == null)
         {
             Debug.LogWarning("No player was found, destroying it...");
@@ -54,26 +53,13 @@ public class Enemy : MonoBehaviour
         }
 
         StartSpawnSequence();
-
-        // Hide Renderer
-        // enemyRenderer.enabled = false;
-        // Show spawn indicator
-        // spawnIndicator.enabled = true;
-
-        // Thời gian delay sẽ bằng 1s / số lần đánh
-        attackDelay = 1f / attackFrequency;
     }
 
     // Update is called once per frame
-    void Update()
+    protected bool CanAttack()
     {
-        // attackTimer là số giây trên mỗi Frame, khi số giây trên mỗi Frame >= số giây delay thì sẽ đánh 1 cái rồi reset attackTimer
-        if (attackTimer >= attackDelay) TryAttack();
-        else
-            Wait();
-
-        // Always follow the player
-        enemyMovement.FollowPlayer();
+        // Nếu enemy chưa đc spawn thì ko làm gì cả
+        return enemyRenderer.enabled;
     }
 
     private void StartSpawnSequence()
@@ -88,28 +74,29 @@ public class Enemy : MonoBehaviour
 
     }
 
-
-    private void TryAttack()
+    private void SpawnSequenceComplete()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        // float magnitude = (player.transform.position - transform.position).magnitude;
-        // Debug.Log("distance " + distanceToPlayer);
-        // Debug.Log("magnitude " + magnitude);
+        // Show the renderer(enemy) after looping animation
+        // enemyRenderer.enabled = true;
+        // Hide spawn indicator
+        // spawnIndicator.enabled = false;
 
-        // playerDectionRadius: phạm vi xung quanh enemy mà khi chạm player thì sẽ kích hoạt Attack
-        if (distanceToPlayer <= playerDetectionRadius) Attack();
+        // Active collider only when spawn sequence is completed to prevent attack enemy before spawning process
+        enemyCollider.enabled = true;
+
+        SetRendererVisibility(true);
+
+        // Prevent Following and Attacking during the whole spawn sequence
+        // hasSpawned = true;
+
+        enemyMovement.StorePlayer(player);
 
     }
 
-    private void Attack()
+    private void SetRendererVisibility(bool visibility)
     {
-        player.TakeDamage(damage);
-        attackTimer = 0;
-    }
-
-    private void Wait()
-    {
-        attackTimer += Time.deltaTime;
+        enemyRenderer.enabled = visibility;
+        spawnIndicator.enabled = !visibility;
     }
 
     public void TakeDamage(int damage)
@@ -134,32 +121,6 @@ public class Enemy : MonoBehaviour
 
         passAwayParticle.Play();
         Destroy(gameObject);
-    }
-
-    private void SpawnSequenceComplete()
-    {
-        // Show the renderer(enemy) after looping animation
-        // enemyRenderer.enabled = true;
-        // Hide spawn indicator
-        // spawnIndicator.enabled = false;
-
-        // Active collider only when spawn sequence is completed to prevent attack enemy before spawning process
-        enemyCollider.enabled = true;
-
-        SetRendererVisibility(true);
-
-        // Prevent Following and Attacking during the whole spawn sequence
-        // hasSpawned = true;
-
-        // Lưu player lại sau khi enemy đc spawn
-        enemyMovement.StorePlayer(player);
-
-    }
-
-    private void SetRendererVisibility(bool visibility)
-    {
-        enemyRenderer.enabled = visibility;
-        spawnIndicator.enabled = !visibility;
     }
 
     void OnDrawGizmos()

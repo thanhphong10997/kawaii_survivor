@@ -10,7 +10,7 @@ public class DamageTextManager : MonoBehaviour
     void Awake()
     {
         // subscribe to action
-        Enemy.onDamageTaken += EnemyHitCallback;
+        MeleeEnemy.onDamageTaken += EnemyHitCallback;
     }
 
 
@@ -25,7 +25,7 @@ public class DamageTextManager : MonoBehaviour
     // Clear action if the game scene reload 
     void OnDestroy()
     {
-        Enemy.onDamageTaken -= EnemyHitCallback;
+        MeleeEnemy.onDamageTaken -= EnemyHitCallback;
     }
 
     private DamageText CreateFunction()

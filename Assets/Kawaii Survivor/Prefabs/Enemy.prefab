@@ -4902,8 +4902,8 @@ GameObject:
   - component: {fileID: 1011052893267628096}
   - component: {fileID: 4302062036437367302}
   - component: {fileID: 5360752830164429399}
-  - component: {fileID: 487202577142201097}
-  m_Layer: 0
+  - component: {fileID: 1730930552759602037}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4944,14 +4944,14 @@ MonoBehaviour:
   enemyRenderer: {fileID: 3509721762532768008}
   spawnIndicator: {fileID: 3318250331737851434}
   scaleValue: 1.2
-  playerDetectionRadius: 0.5
-  maxHealth: 0
+  playerDetectionRadius: 1
+  maxHealth: 10
   passAwayParticle: {fileID: 7516470371972191106}
-  damage: 1
-  attackFrequency: 2
   healthText: {fileID: 1131719254879937960}
-  enemyCollider: {fileID: 487202577142201097}
+  enemyCollider: {fileID: 1730930552759602037}
   showGizmos: 1
+  damage: 1
+  attackFrequency: 1
 --- !u!114 &5360752830164429399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4964,8 +4964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6768886b5e4a8444babf0f00a7ab6bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
---- !u!58 &487202577142201097
+  moveSpeed: 1
+--- !u!58 &1730930552759602037
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4999,8 +4999,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.02069521, y: 0.34000003}
-  m_Radius: 0.42135763
+  m_Offset: {x: -0.037232816, y: 0.3534848}
+  m_Radius: 0.41128784
 --- !u!1 &5655482483836900953
 GameObject:
   m_ObjectHideFlags: 0
@@ -5237,8 +5237,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.7}
-  m_SizeDelta: {x: 5.7959, y: 1.1654}
+  m_AnchoredPosition: {x: 0, y: 2}
+  m_SizeDelta: {x: 6.6383, y: 0.9094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2122344272919044884
 MeshRenderer:
@@ -5334,8 +5334,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 8.98
+  m_fontSizeBase: 8.98
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

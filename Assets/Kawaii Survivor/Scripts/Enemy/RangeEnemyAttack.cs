@@ -76,7 +76,7 @@ public class RangeEnemyAttack : MonoBehaviour
         bulletPool.Release(bullet);
     }
 
-    public void MangeShooting()
+    private void MangeShooting()
     {
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackDelay)

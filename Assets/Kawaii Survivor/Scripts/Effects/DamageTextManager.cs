@@ -10,7 +10,7 @@ public class DamageTextManager : MonoBehaviour
     void Awake()
     {
         // subscribe to action
-        MeleeEnemy.onDamageTaken += EnemyHitCallback;
+        Enemy.onDamageTaken += EnemyHitCallback;
     }
 
 
@@ -25,7 +25,7 @@ public class DamageTextManager : MonoBehaviour
     // Clear action if the game scene reload 
     void OnDestroy()
     {
-        MeleeEnemy.onDamageTaken -= EnemyHitCallback;
+        Enemy.onDamageTaken -= EnemyHitCallback;
     }
 
     private DamageText CreateFunction()
@@ -51,14 +51,14 @@ public class DamageTextManager : MonoBehaviour
 
 
 
-    private void EnemyHitCallback(int damage, Vector2 enemyPosition)
+    private void EnemyHitCallback(int damage, Vector2 enemyPosition, bool isCriticalHit)
     {
         DamageText damageInstance = damageTextPool.Get();
 
         Vector3 spawnPosition = enemyPosition + (Vector2.up * 1.5f) + (Vector2.left * 0.2f);
         damageInstance.transform.position = spawnPosition;
 
-        damageInstance.StartAnimation(damage);
+        damageInstance.StartAnimation(damage, isCriticalHit);
 
         // Release damageInstance sau 1s kể từ lúc start animation
         LeanTween.delayedCall(1, () => damageTextPool.Release(damageInstance));

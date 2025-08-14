@@ -89,9 +89,14 @@ public class RangeWeapon : Weapon
 
     private void Shoot()
     {
-        Enemy closestEnemy = GetClosestEnemy();
+        int damage = GetDamage(out bool isCriticalHit);
+
+        // Nếu direction theo vị trí enemy thì đạn sẽ auto bay theo enemy (đạn đuổi) và rất dễ dính
+        // Enemy closestEnemy = GetClosestEnemy();
+        // Vector2 direction = (closestEnemy.transform.position - shootingPoint.position).normalized;
+        //  bulletInstance.Shoot(damage, direction, isCriticalHit);
+
         Bullet bulletInstance = bulletPool.Get();
-        Vector2 direction = (closestEnemy.transform.position - shootingPoint.position).normalized;
-        bulletInstance.Shoot(damage, direction);
+        bulletInstance.Shoot(damage, transform.up, isCriticalHit);
     }
 }

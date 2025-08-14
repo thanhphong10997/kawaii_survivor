@@ -27,7 +27,7 @@ public abstract class Enemy : MonoBehaviour
     protected int health;
 
     [Header("Actions")]
-    public static Action<int, Vector2> onDamageTaken;
+    public static Action<int, Vector2, bool> onDamageTaken;
 
     [Header("Collider")]
     [SerializeField] protected Collider2D enemyCollider;
@@ -99,13 +99,13 @@ public abstract class Enemy : MonoBehaviour
         spawnIndicator.enabled = !visibility;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool isCriticalHit)
     {
         int realDamage = Mathf.Min(damage, health);
         health -= realDamage;
 
         // call onDamageTaken action
-        onDamageTaken?.Invoke(damage, transform.position);
+        onDamageTaken?.Invoke(damage, transform.position, isCriticalHit);
 
         healthText.text = health.ToString();
 

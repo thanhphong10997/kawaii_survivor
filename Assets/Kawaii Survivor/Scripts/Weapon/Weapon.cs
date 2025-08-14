@@ -59,6 +59,20 @@ public abstract class Weapon : MonoBehaviour
         return closestEnemy;
     }
 
+    protected int GetDamage(out bool isCriticalHit)
+    {
+        isCriticalHit = false;
+        // 50% cơ hội đc critical hit
+        if (Random.Range(0, 101) <= 50)
+        {
+            isCriticalHit = true;
+
+            return damage * 2;
+        }
+
+        return damage;
+    }
+
 
     private void OnDrawGizmosSelected()
     {

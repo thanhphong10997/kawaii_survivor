@@ -9347,8 +9347,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1116325238}
-  - component: {fileID: 1116325237}
   - component: {fileID: 1116325239}
+  - component: {fileID: 1116325240}
   m_Layer: 0
   m_Name: Deboink
   m_TagString: Untagged
@@ -9356,29 +9356,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1116325237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1116325236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7700c9221cc63f84cbb1b4a1087528ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitDetectionTransform: {fileID: 1031938644}
-  hitCollider: {fileID: 1031938645}
-  range: 3
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 64
-  aimLerp: 12
-  hitRadius: 0.3
-  damage: 5
-  attackDelay: 0.5
-  animator: {fileID: 1116325239}
 --- !u!4 &1116325238
 Transform:
   m_ObjectHideFlags: 0
@@ -9417,6 +9394,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1116325240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116325236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffdb60f3772407f4e867e5056a9c179c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 3
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
+  aimLerp: 12
+  damage: 5
+  attackDelay: 1
+  animator: {fileID: 1116325239}
+  hitDetectionTransform: {fileID: 1031938644}
+  hitCollider: {fileID: 1031938645}
 --- !u!1 &1128858468
 GameObject:
   m_ObjectHideFlags: 0
@@ -10412,16 +10411,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831f60e394a4ce14ea63387881cff40b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitDetectionTransform: {fileID: 0}
-  hitCollider: {fileID: 0}
   range: 6
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
   aimLerp: 12
-  hitRadius: 0
   damage: 10
-  attackDelay: 1
+  attackDelay: 0.5
   animator: {fileID: 1416835906}
   shootingPoint: {fileID: 2123662565}
   bulletPrefab: {fileID: 1814526509473795089, guid: 9b1791f5215e07741a00a2d3cdca63f5, type: 3}
@@ -10855,47 +10851,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1505648762}
---- !u!1 &1548699607 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1524681923097045546, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-  m_PrefabInstance: {fileID: 6434040528830937837}
-  m_PrefabAsset: {fileID: 0}
---- !u!58 &1548699611
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548699607}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.037232816, y: 0.3534848}
-  m_Radius: 0.41128784
 --- !u!1 &1574300421
 GameObject:
   m_ObjectHideFlags: 0
@@ -12029,17 +11984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2109921298 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1131719254879937960, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-  m_PrefabInstance: {fileID: 6434040528830937837}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2123662564
 GameObject:
   m_ObjectHideFlags: 0
@@ -12280,10 +12224,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1228704049}
     m_Modifications:
-    - target: {fileID: 487202577142201097, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1011052893267628096, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.1
@@ -12324,104 +12264,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1131719254879937960, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_text
-      value: '10
-
-'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1131719254879937960, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_fontSize
-      value: 8.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 1131719254879937960, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 96e602eed40c9f84184a8acebb8ca452, type: 2}
-    - target: {fileID: 1131719254879937960, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 8.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 1131719254879937960, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -5764616704377124775, guid: 96e602eed40c9f84184a8acebb8ca452, type: 2}
-    - target: {fileID: 1131719254879937960, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 1131719254879937960, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1131719254879937960, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1524681923097045546, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 1524681923097045546, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122344272919044884, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: -5764616704377124775, guid: 96e602eed40c9f84184a8acebb8ca452, type: 2}
-    - target: {fileID: 3631156627763839325, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 6.6383
-      objectReference: {fileID: 0}
-    - target: {fileID: 3631156627763839325, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.9094
-      objectReference: {fileID: 0}
-    - target: {fileID: 3631156627763839325, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3631156627763839325, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4302062036437367302, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: maxHealth
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4302062036437367302, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: healthText
-      value: 
-      objectReference: {fileID: 2109921298}
-    - target: {fileID: 4302062036437367302, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: enemyCollider
-      value: 
-      objectReference: {fileID: 1548699611}
-    - target: {fileID: 4302062036437367302, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: dmgTextManager
-      value: 
-      objectReference: {fileID: 1617985860}
-    - target: {fileID: 4302062036437367302, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: attackFrequency
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4302062036437367302, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: playerDetectionRadius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360752830164429399, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      propertyPath: moveSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 487202577142201097, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1524681923097045546, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1548699611}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
 --- !u!4 &6434040528830937838 stripped
 Transform:

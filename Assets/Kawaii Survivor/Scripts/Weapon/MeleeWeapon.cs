@@ -105,7 +105,8 @@ public class MeleeWeapon : Weapon
             // Check if enemy is already in the list or not
             if (!damagedEnemies.Contains(currentEnemy))
             {
-                currentEnemy.TakeDamage(damage);
+                int damage = GetDamage(out bool isCriticalHit);
+                currentEnemy.TakeDamage(damage, isCriticalHit);
                 damagedEnemies.Add(currentEnemy);
 
             }

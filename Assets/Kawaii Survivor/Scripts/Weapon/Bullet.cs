@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     [Header("Layer")]
     [SerializeField] private LayerMask enemyMask;
     private int damage;
+    private bool isCriticalHit;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -40,10 +41,11 @@ public class Bullet : MonoBehaviour
         this.rangeWeapon = rangeWeapon;
     }
 
-    public void Shoot(int damage, Vector2 direction)
+    public void Shoot(int damage, Vector2 direction, bool isCriticalHit)
     {
         Invoke("Release", 1);
         this.damage = damage;
+        this.isCriticalHit = isCriticalHit;
         // Hướng trục x bên phải của đạn (hướng đạn bay) về hướng player
         transform.right = direction;
         rig.linearVelocity = direction * moveSpeed;
@@ -83,7 +85,7 @@ public class Bullet : MonoBehaviour
 
     private void Attack(Enemy enemy)
     {
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage, isCriticalHit);
     }
 
     private bool IsInLayerMask(int layer, LayerMask layerMask)

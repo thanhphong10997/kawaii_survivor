@@ -20,7 +20,6 @@ public class DamageText : MonoBehaviour
     [NaughtyAttributes.Button]
     public void StartAnimation(int damage, bool isCriticalHit)
     {
-        Debug.Log("isCriticalHit:" + isCriticalHit);
         damageText.text = damage.ToString();
         damageText.color = isCriticalHit ? Color.red : Color.white;
         damageTextAnimator.Play("Jump Up and Fade Out");

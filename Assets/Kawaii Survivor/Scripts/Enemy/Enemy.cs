@@ -28,6 +28,7 @@ public abstract class Enemy : MonoBehaviour
 
     [Header("Actions")]
     public static Action<int, Vector2, bool> onDamageTaken;
+    public static Action<Vector2> onPassedAway;
 
     [Header("Collider")]
     [SerializeField] protected Collider2D enemyCollider;
@@ -115,6 +116,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void PassAwayEffect()
     {
+        onPassedAway?.Invoke(transform.position);
         // unparent the passAway component from Enemy component
         passAwayParticle.transform.parent = null;
         // passAwayParticle.transform.SetParent(null);

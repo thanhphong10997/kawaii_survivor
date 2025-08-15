@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerDetection : MonoBehaviour
 {
     [Header("Collider")]
-    [SerializeField] private CircleCollider2D daveCollider;
+    [SerializeField] private CircleCollider2D collectableCollider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     // Update is called once per frame
@@ -29,20 +29,14 @@ public class PlayerDetection : MonoBehaviour
         // Debug.Log("Đã có va chạm Trigger với: " + collider.gameObject.name);
 
         // Lấy candy component từ collider(player)
-        if (collider.TryGetComponent(out Candy candy))
+        if (collider.TryGetComponent(out ICollectable collectable))
         {
             // Nếu ko chạm collider của Dave (chạm các collider khác như cây cối enemy...) thì return
-            if (!collider.IsTouching(daveCollider)) return;
+            if (!collider.IsTouching(collectableCollider)) return;
 
-            candy.Collect(transform);
+            collectable.Collect(transform);
         }
 
-        if (collider.TryGetComponent(out Cash cash))
-        {
-            // Nếu ko chạm collider của Dave (chạm các collider khác như cây cối enemy...) thì return
-            if (!collider.IsTouching(daveCollider)) return;
 
-            cash.Collect(transform);
-        }
     }
 }

@@ -8773,6 +8773,74 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.037232816, y: 0.3534848}
   m_Radius: 0.41128784
+--- !u!1 &632777674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 632777675}
+  - component: {fileID: 632777676}
+  m_Layer: 7
+  m_Name: Collectable Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &632777675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632777674}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 777806581}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &632777676
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632777674}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.66}
+  m_Radius: 4
 --- !u!1 &764565352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1524681923097045546, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
@@ -8996,6 +9064,7 @@ Transform:
   - {fileID: 88578183}
   - {fileID: 1116325238}
   - {fileID: 1416835904}
+  - {fileID: 632777675}
   m_Father: {fileID: 2138406880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &777806582
@@ -9074,7 +9143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b5fcad71b6de045b02c01562e768b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  daveCollider: {fileID: 777806582}
+  collectableCollider: {fileID: 632777676}
 --- !u!1 &835905310
 GameObject:
   m_ObjectHideFlags: 0

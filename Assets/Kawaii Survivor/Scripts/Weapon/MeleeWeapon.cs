@@ -54,7 +54,7 @@ public class MeleeWeapon : Weapon
         }
 
         // Lerp giúp chuyển động mượt mà hơn
-        // Nếu ko phát hiện enemy nào gần thì tâm của weapon sẽ chuyển động hướng lên trên (độ mượt phụ thuộc vào airmLerp)
+        // Nếu ko phát hiện enemy nào gần thì tâm của weapon sẽ chuyển động hướng lên trên (độ mượt phụ thuộc vào aimLerp)
         transform.up = Vector3.Lerp(transform.up, targetUpVector, aimLerp * Time.deltaTime);
 
         // Wait a delay time then attack the enemy

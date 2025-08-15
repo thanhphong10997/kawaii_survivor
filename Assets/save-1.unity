@@ -7837,6 +7837,52 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &139908844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 139908845}
+  - component: {fileID: 139908846}
+  m_Layer: 0
+  m_Name: Drop Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &139908845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139908844}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1303958995}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &139908846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139908844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f969ab2452b4a40bdda3a5e7218a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  candyPrefab: {fileID: 7258016834977072253, guid: c40b46e1877fcc040adbf969fd0e1308, type: 3}
+  cashPrefab: {fileID: 6900538150908804177, guid: 3840e4a7500bf9047991faa036ef1811, type: 3}
 --- !u!1 &212654003
 GameObject:
   m_ObjectHideFlags: 0
@@ -8882,6 +8928,7 @@ GameObject:
   - component: {fileID: 777806583}
   - component: {fileID: 777806578}
   - component: {fileID: 777806584}
+  - component: {fileID: 777806585}
   - component: {fileID: 777806579}
   - component: {fileID: 777806582}
   m_Layer: 7
@@ -9015,6 +9062,19 @@ MonoBehaviour:
   maxHealth: 10
   healthSlider: {fileID: 409251990}
   healthText: {fileID: 391727857}
+--- !u!114 &777806585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777806577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b5fcad71b6de045b02c01562e768b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  daveCollider: {fileID: 777806582}
 --- !u!1 &835905310
 GameObject:
   m_ObjectHideFlags: 0
@@ -9752,6 +9812,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1358436999}
+  - {fileID: 139908845}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1310257087

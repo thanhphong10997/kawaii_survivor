@@ -34,7 +34,15 @@ public class PlayerDetection : MonoBehaviour
             // Nếu ko chạm collider của Dave (chạm các collider khác như cây cối enemy...) thì return
             if (!collider.IsTouching(daveCollider)) return;
 
-            Destroy(candy.gameObject);
+            candy.Collect(transform);
+        }
+
+        if (collider.TryGetComponent(out Cash cash))
+        {
+            // Nếu ko chạm collider của Dave (chạm các collider khác như cây cối enemy...) thì return
+            if (!collider.IsTouching(daveCollider)) return;
+
+            cash.Collect(transform);
         }
     }
 }

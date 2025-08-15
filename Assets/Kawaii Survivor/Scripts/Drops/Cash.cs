@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Candy : MonoBehaviour
+public class Cash : MonoBehaviour
 {
     private bool collected;
     // Start is called once before the first execution of Update after the MonoBehaviour is created

@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
 
+using Random = UnityEngine.Random;
 public class DropManager : MonoBehaviour
 {
     [SerializeField] private Candy candyPrefab;
+    [SerializeField] private Cash cashPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -23,6 +25,8 @@ public class DropManager : MonoBehaviour
 
     private void EnemyPassedAwayCallback(Vector2 enemyPosition)
     {
-        Candy candyInstance = Instantiate(candyPrefab, enemyPosition, Quaternion.identity, transform);
+        bool shouldSpawnCash = Random.Range(0, 101) <= 20;
+        GameObject dropObject = shouldSpawnCash ? cashPrefab.gameObject : candyPrefab.gameObject;
+        GameObject dropInstance = Instantiate(dropObject, enemyPosition, Quaternion.identity, transform);
     }
 }

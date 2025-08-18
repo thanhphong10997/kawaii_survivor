@@ -1,9 +1,15 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using NaughtyAttributes;
 using UnityEngine;
 
+[RequireComponent(typeof(WaveManagerUI))]
 public class WaveManager : MonoBehaviour
 {
+    [Header("Elements")]
+    [SerializeField] private Player player;
+    private WaveManagerUI waveManagerUI;
+
     [Header("Waves")]
     [SerializeField] Wave[] waves;
 
@@ -11,21 +17,42 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float waveDuration;
     private List<float> localCounters = new List<float>();
     private float timer;
+    private int currentWaveIndex;
+
+    private bool isTimerOn;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        localCounters.Add(1);
+        waveManagerUI = GetComponent<WaveManagerUI>();
+        StartWave(currentWaveIndex);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timer < waveDuration) ManageCurrentWave();
+        if (!isTimerOn) return;
+        if (timer < waveDuration)
+        {
+            string timerCountDown = ((int)(waveDuration - timer)).ToString();
+            waveManagerUI.UpdateWaveTimer(timerCountDown);
+            ManageCurrentWave();
+
+        }
+        else StartWaveTransition();
+    }
+
+    private void StartWave(int waveIndex)
+    {
+        isTimerOn = true;
+        localCounters.Clear();
+        timer = 0;
+        waveManagerUI.UpdateWaveText($"Wave {currentWaveIndex + 1} / {waves.Length}");
+        foreach (WaveSegment waveSegment in waves[waveIndex].segments) localCounters.Add(1);
     }
 
     private void ManageCurrentWave()
     {
-        Wave currentWave = waves[0];
+        Wave currentWave = waves[currentWaveIndex];
         for (int i = 0; i < currentWave.segments.Count; i++)
         {
             WaveSegment segment = currentWave.segments[i];
@@ -44,13 +71,50 @@ public class WaveManager : MonoBehaviour
             //  localCounters rất quan trọng vì có tác dụng chỉ spawn số lượng =  spawnFrequency trong mỗi giây, nếu ko có localCounters thì enemy sẽ spawn mỗi frame
             if (timeSinceSegmentStart / spawnDelay > localCounters[i])
             {
-                Instantiate(segment.prefab, Vector2.zero, Quaternion.identity, transform);
+                Instantiate(segment.prefab, GetSpawnPosition(), Quaternion.identity, transform);
                 localCounters[i]++;
             }
         }
         timer += Time.deltaTime;
+
+    }
+    private Vector2 GetSpawnPosition()
+    {
+        Vector2 direction = Random.onUnitSphere;
+        //  Random.onUnitSphere trả ra Vector3 đã đc normalize nhưng offset là Vector2 nên phải normalize thêm 1 lần 
+        Vector2 offset = direction.normalized * Random.Range(6, 10);
+        Vector2 targetPosition = (Vector2)player.transform.position + offset;
+
+        targetPosition.x = Mathf.Clamp(targetPosition.x, -18, 18);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, -8, 8);
+
+
+        return targetPosition;
     }
 
+    private void StartWaveTransition()
+    {
+        isTimerOn = false;
+        DefeatAllEnemies();
+
+        currentWaveIndex++;
+        if (currentWaveIndex >= waves.Length)
+        {
+            Debug.Log("Waves completed");
+            waveManagerUI.UpdateWaveText("Stage Completed");
+            waveManagerUI.UpdateWaveTimer("");
+        }
+        else StartWave(currentWaveIndex);
+
+
+    }
+
+    private void DefeatAllEnemies()
+    {
+        transform.Clear();
+    }
+
+    // Khai báo wave
     [System.Serializable]
     public struct Wave
     {
@@ -58,6 +122,7 @@ public class WaveManager : MonoBehaviour
         public List<WaveSegment> segments;
     }
 
+    // Khai báo wave segments
     [System.Serializable]
     public struct WaveSegment
     {

@@ -63,7 +63,7 @@ public class RangeWeapon : Weapon
 
         if (closestEnemy != null)
         {
-            targetUpVector = (closestEnemy.transform.position - shootingPoint.position).normalized;
+            targetUpVector = (closestEnemy.transform.position - transform.position).normalized;
             // Giúp tâm của weapon chuyển động hướng vào địch khi tấn công
             transform.up = targetUpVector;
             MangeShooting();

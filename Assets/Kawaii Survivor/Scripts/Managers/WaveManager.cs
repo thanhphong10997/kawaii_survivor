@@ -4,7 +4,7 @@ using NaughtyAttributes;
 using UnityEngine;
 
 [RequireComponent(typeof(WaveManagerUI))]
-public class WaveManager : MonoBehaviour
+public class WaveManager : MonoBehaviour, IGameStateListener
 {
     [Header("Elements")]
     [SerializeField] private Player player;
@@ -24,7 +24,6 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         waveManagerUI = GetComponent<WaveManagerUI>();
-        StartWave(currentWaveIndex);
     }
 
     // Update is called once per frame
@@ -103,8 +102,10 @@ public class WaveManager : MonoBehaviour
             Debug.Log("Waves completed");
             waveManagerUI.UpdateWaveText("Stage Completed");
             waveManagerUI.UpdateWaveTimer("");
+            GameManager.instance.SetGameState(GameState.STAGECOMPLETE);
         }
-        else StartWave(currentWaveIndex);
+        // Dùng singleton cho Game Manager, lấy hàm WaveCompletedCallback thông qua instance mà k cần reference tới Game Manager
+        else GameManager.instance.WaveCompletedCallback();
 
 
     }
@@ -112,6 +113,25 @@ public class WaveManager : MonoBehaviour
     private void DefeatAllEnemies()
     {
         transform.Clear();
+    }
+
+    private void StartNextWave()
+    {
+        StartWave(currentWaveIndex);
+    }
+
+    public void GameStateChangedCallback(GameState gameState)
+    {
+        switch (gameState)
+        {
+            case GameState.GAME:
+                StartNextWave();
+                break;
+            case GameState.GAMEOVER:
+                isTimerOn = false;
+                DefeatAllEnemies();
+                break;
+        }
     }
 
     // Khai báo wave

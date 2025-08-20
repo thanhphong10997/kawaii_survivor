@@ -12,6 +12,8 @@ public class PlayerLevel : MonoBehaviour
     private int requireXp;
     private int currentXp;
     private int level;
+    private int levelsEarnedThisWave;
+
 
     void Awake()
     {
@@ -46,6 +48,7 @@ public class PlayerLevel : MonoBehaviour
     private void LevelUp()
     {
         level++;
+        levelsEarnedThisWave++;
         currentXp = 0;
         UpdateRequireXp();
     }
@@ -62,5 +65,14 @@ public class PlayerLevel : MonoBehaviour
         levelText.text = "lvl " + (level + 1);
     }
 
+    public bool HasLeveledUp()
+    {
+        if (levelsEarnedThisWave > 0)
+        {
+            levelsEarnedThisWave--;
+            return true;
+        }
 
+        return false;
+    }
 }

@@ -10501,7 +10501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rig: {fileID: 777806579}
   joystick: {fileID: 1227731286}
-  moveSpeed: 3
+  baseMoveSpeed: 5
 --- !u!50 &777806579
 Rigidbody2D:
   serializedVersion: 5
@@ -10609,7 +10609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4312cfb05195c74bbfc2fe98aab5392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHealth: 5
+  baseMaxHealth: 100
   healthSlider: {fileID: 409251990}
   healthText: {fileID: 391727857}
 --- !u!114 &777806585
@@ -10639,7 +10639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xpBar: {fileID: 651120317}
   levelText: {fileID: 20799949}
-  isDebug: 1
+  isDebug: 0
 --- !u!1 &786454710
 GameObject:
   m_ObjectHideFlags: 0
@@ -10897,6 +10897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62d36263048dc54bb62f873d1289454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 7ee164cf3462dae4f91b2bf5668c9f35, type: 2}
 --- !u!1 &835905310
 GameObject:
   m_ObjectHideFlags: 0
@@ -11623,7 +11624,7 @@ MonoBehaviour:
     - tStartEnd: {x: 33, y: 100}
       spawnFrequency: 5
       prefab: {fileID: 1524681923097045546, guid: a5a43dd7bef5b0a448ec61c8c9c43613, type: 3}
-  waveDuration: 1
+  waveDuration: 20
 --- !u!114 &1041767921
 MonoBehaviour:
   m_ObjectHideFlags: 0

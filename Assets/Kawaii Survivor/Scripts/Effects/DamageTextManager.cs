@@ -11,6 +11,7 @@ public class DamageTextManager : MonoBehaviour
     {
         // subscribe to action
         Enemy.onDamageTaken += EnemyHitCallback;
+        PlayerHealth.onAttackDodged += AttackDodgedCallback;
     }
 
 
@@ -26,6 +27,7 @@ public class DamageTextManager : MonoBehaviour
     void OnDestroy()
     {
         Enemy.onDamageTaken -= EnemyHitCallback;
+        PlayerHealth.onAttackDodged += AttackDodgedCallback;
     }
 
     private DamageText CreateFunction()
@@ -50,7 +52,6 @@ public class DamageTextManager : MonoBehaviour
     }
 
 
-
     private void EnemyHitCallback(int damage, Vector2 enemyPosition, bool isCriticalHit)
     {
         DamageText damageInstance = damageTextPool.Get();
@@ -58,7 +59,20 @@ public class DamageTextManager : MonoBehaviour
         Vector3 spawnPosition = enemyPosition + (Vector2.up * 1.5f) + (Vector2.left * 0.2f);
         damageInstance.transform.position = spawnPosition;
 
-        damageInstance.StartAnimation(damage, isCriticalHit);
+        damageInstance.StartAnimation(damage.ToString(), isCriticalHit);
+
+        // Release damageInstance sau 1s kể từ lúc start animation
+        LeanTween.delayedCall(1, () => damageTextPool.Release(damageInstance));
+    }
+
+    private void AttackDodgedCallback(Vector2 playerPosition)
+    {
+        DamageText damageInstance = damageTextPool.Get();
+
+        Vector3 spawnPosition = playerPosition + (Vector2.up * 1.5f) + (Vector2.left * 0.2f);
+        damageInstance.transform.position = spawnPosition;
+
+        damageInstance.StartAnimation("Dodge", false);
 
         // Release damageInstance sau 1s kể từ lúc start animation
         LeanTween.delayedCall(1, () => damageTextPool.Release(damageInstance));

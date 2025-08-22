@@ -63,25 +63,29 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
     private Action GetActionToPeform(Stat stat, out string valueString)
     {
         valueString = "";
-        float value;
-        value = Random.Range(1, 10);
-        valueString = $"+{value}%";
+        float value = 0;
+
         switch (stat)
         {
             case Stat.Attack:
                 value = Random.Range(1, 10);
+                valueString = $"+{value}%";
                 break;
             case Stat.AttackSpeed:
+                value = Random.Range(1, 10);
+                valueString = $"+{value}%";
                 break;
             case Stat.CriticalChance:
                 value = Random.Range(1, 10);
+                valueString = $"+{value}%";
                 break;
             case Stat.CriticalPercent:
                 value = Random.Range(1f, 2f);
-                valueString = $"+{value:F2}";
+                valueString = $"+{value:F2}x";
                 break;
             case Stat.MoveSpeed:
                 value = Random.Range(1, 10);
+                valueString = $"+{value}%";
                 break;
             case Stat.MaxHealth:
                 value = Random.Range(1, 5);
@@ -93,18 +97,23 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
                 break;
             case Stat.HealthRecoverySpeed:
                 value = Random.Range(1, 10);
+                valueString = $"+{value}%";
                 break;
             case Stat.Armor:
                 value = Random.Range(1, 10);
+                valueString = $"+{value}%";
                 break;
             case Stat.Luck:
                 value = Random.Range(1, 10);
+                valueString = $"+{value}%";
                 break;
             case Stat.Dodge:
                 value = Random.Range(1, 10);
+                valueString = $"+{value}%";
                 break;
             case Stat.Lifesteal:
                 value = Random.Range(1, 10);
+                valueString = $"+{value}%";
                 break;
             default:
                 Debug.Log("Invalid Stat");

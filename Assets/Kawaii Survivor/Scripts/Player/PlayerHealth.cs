@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IPlayerStatsDependency
 {
     [Header("Settings")]
-    [SerializeField] private int maxHealth;
+    [SerializeField] private int baseMaxHealth;
+    private int maxHealth;
 
     [Header("Components")]
     [SerializeField] private Slider healthSlider;
@@ -16,8 +17,6 @@ public class PlayerHealth : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        health = maxHealth;
-        UpdateHealthUI();
     }
 
     // Update is called once per frame
@@ -46,5 +45,17 @@ public class PlayerHealth : MonoBehaviour
         float healthBarValue = (float)health / maxHealth;
         healthSlider.value = healthBarValue;
         healthText.text = $"{health} / {maxHealth}";
+    }
+
+    public void UpdateStats(PlayerStatsManager playerStatsManager)
+    {
+        float addedHealth = playerStatsManager.GetStatValue(Stat.MaxHealth);
+        maxHealth = baseMaxHealth + (int)addedHealth;
+
+        // Nếu addedHealth có giá trị âm lớn hơn baseMaxHealth thì maxHealth sẽ ra số âm, nên sử dụng Mathf.Max để tránh trường hợp đó
+        maxHealth = Mathf.Max(maxHealth, 1);
+        health = maxHealth;
+        Debug.Log("maxHealth: " + maxHealth);
+        UpdateHealthUI();
     }
 }

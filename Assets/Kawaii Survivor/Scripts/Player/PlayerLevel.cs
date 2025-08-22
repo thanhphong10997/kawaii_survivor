@@ -14,6 +14,9 @@ public class PlayerLevel : MonoBehaviour
     private int level;
     private int levelsEarnedThisWave;
 
+    [Header("Debug")]
+    [SerializeField] private bool isDebug;
+
 
     void Awake()
     {
@@ -67,6 +70,8 @@ public class PlayerLevel : MonoBehaviour
 
     public bool HasLeveledUp()
     {
+        if (isDebug) return true;
+
         if (levelsEarnedThisWave > 0)
         {
             levelsEarnedThisWave--;

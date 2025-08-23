@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6564196810b9b243a28e220456c5c73, type: 3}
+  m_Name: DeBoink Data
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: DeBoink
+  <Sprite>k__BackingField: {fileID: 5485319108022510092, guid: 15c981701acaf3f4b840cf2f1f7d3446, type: 3}
+  <PurchasePrice>k__BackingField: 100
+  <Prefab>k__BackingField: {fileID: 7381132652349608643, guid: a50416714fb15c7449a008674627c951, type: 3}
+  attack: 0
+  attackSpeed: 0
+  criticalChance: 0
+  criticalPercent: 0
+  range: 0

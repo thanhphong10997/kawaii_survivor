@@ -104,7 +104,6 @@ public class PlayerHealth : MonoBehaviour, IPlayerStatsDependency
         // Nếu addedHealth có giá trị âm lớn hơn baseMaxHealth thì maxHealth sẽ ra số âm, nên sử dụng Mathf.Max để tránh trường hợp đó
         maxHealth = Mathf.Max(maxHealth, 1);
         health = maxHealth;
-        Debug.Log("maxHealth: " + maxHealth);
         UpdateHealthUI();
 
         armor = playerStatsManager.GetStatValue(Stat.Armor);

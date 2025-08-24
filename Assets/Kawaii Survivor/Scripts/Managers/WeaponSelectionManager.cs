@@ -7,10 +7,12 @@ public class WeaponSelectionManager : MonoBehaviour, IGameStateListener
     [Header("Elements")]
     [SerializeField] private Transform containersParent;
     [SerializeField] private WeaponSelectionContainer weaponContainerPrefab;
+    [SerializeField] private PlayerWeapons playerWeapons;
 
     [Header("Data")]
     [SerializeField] private WeaponDataSO[] starterWeapon;
-
+    private WeaponDataSO selectedWeapon;
+    private int initialWeaponLevel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +32,14 @@ public class WeaponSelectionManager : MonoBehaviour, IGameStateListener
         {
             case GameState.WEAPONSELECTION:
                 Configure();
+                break;
+            // Weapon sẽ đc add khi bấm start game
+            case GameState.GAME:
+                // Chỉ cho phép add weapon 1 lần ở bước chọn weapon
+                if (selectedWeapon == null) return;
+                playerWeapons.AddWeapon(selectedWeapon, initialWeaponLevel);
+                selectedWeapon = null;
+                initialWeaponLevel = 0;
                 break;
         }
     }
@@ -58,12 +68,14 @@ public class WeaponSelectionManager : MonoBehaviour, IGameStateListener
         weaponContainerInstance.Configure(weaponData.Sprite, weaponData.Name, level);
         weaponContainerInstance.Button.onClick.RemoveAllListeners();
         // Lý do thêm weaponContainerInstance để biết nút nào được nhấn, weaponData để truy cập text của weapon được nhấn
-        weaponContainerInstance.Button.onClick.AddListener(() => WeaponSelectedCallback(weaponContainerInstance, weaponData));
+        weaponContainerInstance.Button.onClick.AddListener(() => WeaponSelectedCallback(weaponContainerInstance, weaponData, level));
 
     }
 
-    private void WeaponSelectedCallback(WeaponSelectionContainer containerInstance, WeaponDataSO weaponData)
+    private void WeaponSelectedCallback(WeaponSelectionContainer containerInstance, WeaponDataSO weaponData, int level)
     {
+        selectedWeapon = weaponData;
+        initialWeaponLevel = level;
         // Lặp qua các children nằm bên trong containersParent có type là WeaponSelectionContainer
         foreach (WeaponSelectionContainer container in containersParent.GetComponentsInChildren<WeaponSelectionContainer>())
         {

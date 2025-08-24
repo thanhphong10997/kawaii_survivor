@@ -23,22 +23,7 @@ public abstract class Weapon : MonoBehaviour, IPlayerStatsDependency
     protected float criticalPercent;
 
     [Header("Level")]
-    [field: SerializeField] public int Level { get; private set; }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Lấy ra tất cả các Enemy Object và gán vào Enemy Array
-        // Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-
-
-    }
-
+    public int Level { get; private set; }
 
 
     protected Enemy GetClosestEnemy()
@@ -98,6 +83,13 @@ public abstract class Weapon : MonoBehaviour, IPlayerStatsDependency
 
         if (WeaponData.Prefab.GetType() == typeof(RangeWeapon))
             range = WeaponData.GetStatValue(Stat.Range) * multiplier;
+    }
+
+    public void UpgradeTo(int targetLevel)
+    {
+        Debug.Log("Level is: " + targetLevel);
+        Level = targetLevel;
+        ConfigureStats();
     }
 
 }

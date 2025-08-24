@@ -12,19 +12,9 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        // Kiểm tra nếu đã có thể hiện của lớp này
-        if (instance != null && instance != this)
-        {
-            // 3. Nếu đã có, hủy đối tượng hiện tại
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            // Nếu chưa có, đây là thể hiện duy nhất
-            instance = this;
-            // Đảm bảo đối tượng không bị hủy khi chuyển Scene
-            DontDestroyOnLoad(this.gameObject);
-        }
+        // Kiểm tra nếu chưa có instance nào đc tạo thì gán đây là instance, nếu có rồi thì destroy object
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
     }
     void Start()
     {

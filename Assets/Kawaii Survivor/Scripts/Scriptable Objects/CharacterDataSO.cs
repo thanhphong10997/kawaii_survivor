@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Thêm option khi chuột phải Create => Thêm option Script Object -> New Character Data, order: 0 => Layer sẽ nằm ở trên, số càng cao thì layer sẽ nằm dưới
 // Khi tạo file New Character Data từ Scriptable Object, New Character Data sẽ tự động kế thừa CharacterDataSO script
-[CreateAssetMenu(fileName = "Character Data", menuName = "Scriptable Object/New Character Data", order = 0)]
+[CreateAssetMenu(fileName = "Character Data", menuName = "Scriptable Objects/New Character Data", order = 0)]
 public class CharacterDataSO : ScriptableObject
 {
     [field: SerializeField] public string Name { get; private set; }

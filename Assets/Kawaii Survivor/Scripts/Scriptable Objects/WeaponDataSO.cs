@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Weapon Data", menuName = "Scriptable Object/New Weapon Data", order = 0)]
+[CreateAssetMenu(fileName = "Weapon Data", menuName = "Scriptable Objects/New Weapon Data", order = 0)]
 
 public class WeaponDataSO : ScriptableObject
 {

@@ -114,9 +114,14 @@ public abstract class Enemy : MonoBehaviour
 
     }
 
-    private void PassAwayEffect()
+    public void PassAwayEffect()
     {
         onPassedAway?.Invoke(transform.position);
+        PassAwayAfterWave();
+    }
+
+    public void PassAwayAfterWave()
+    {
         // unparent the passAway component from Enemy component
         passAwayParticle.transform.parent = null;
         // passAwayParticle.transform.SetParent(null);

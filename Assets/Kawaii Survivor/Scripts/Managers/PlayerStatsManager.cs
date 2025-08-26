@@ -16,16 +16,7 @@ public class PlayerStatsManager : MonoBehaviour
         playerStats = playerData.BaseStats;
         foreach (KeyValuePair<Stat, float> kvp in playerStats) addends.Add(kvp.Key, 0);
     }
-    void Start()
-    {
-        UpdatePlayerStats();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Start() => UpdatePlayerStats();
 
     public void AddPlayerStat(Stat stat, float value)
     {
@@ -36,8 +27,6 @@ public class PlayerStatsManager : MonoBehaviour
         else Debug.LogError($"The key {stat} has not been found");
 
         UpdatePlayerStats();
-
-        // Objects -> List Object stats
 
     }
 
@@ -50,10 +39,7 @@ public class PlayerStatsManager : MonoBehaviour
         }
     }
 
-    public float GetStatValue(Stat stat)
-    {
-        float value = playerStats[stat] + addends[stat];
-        return value;
-    }
+    public float GetStatValue(Stat stat) => playerStats[stat] + addends[stat];
+
 
 }

@@ -74,20 +74,17 @@ public abstract class Weapon : MonoBehaviour, IPlayerStatsDependency
 
     protected void ConfigureStats()
     {
-        // Khi weapon đạt lv 3 thì damage sẽ nhân đôi, có thể tùy chỉnh / 3 để tăng hoặc giảm damage khi lên lv
-        float multiplier = 1 + (float)Level / 3;
-        damage = Mathf.RoundToInt(WeaponData.GetStatValue(Stat.Attack) * multiplier);
-        attackDelay = 1f / (WeaponData.GetStatValue(Stat.AttackSpeed) * multiplier);
-        criticalChance = Mathf.RoundToInt(WeaponData.GetStatValue(Stat.CriticalChance) * multiplier);
-        criticalPercent = WeaponData.GetStatValue(Stat.CriticalPercent) * multiplier;
+        Dictionary<Stat, float> calculatedStats = WeaponStatsCalculator.GetStats(WeaponData, Level);
 
-        if (WeaponData.Prefab.GetType() == typeof(RangeWeapon))
-            range = WeaponData.GetStatValue(Stat.Range) * multiplier;
+        damage = Mathf.RoundToInt(calculatedStats[Stat.Attack]);
+        attackDelay = 1f / calculatedStats[Stat.AttackSpeed];
+        criticalChance = Mathf.RoundToInt(calculatedStats[Stat.CriticalChance]);
+        criticalPercent = calculatedStats[Stat.CriticalPercent];
+        range = calculatedStats[Stat.Range];
     }
 
     public void UpgradeTo(int targetLevel)
     {
-        Debug.Log("Level is: " + targetLevel);
         Level = targetLevel;
         ConfigureStats();
     }

@@ -16,8 +16,8 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 5485319108022510092, guid: 15c981701acaf3f4b840cf2f1f7d3446, type: 3}
   <PurchasePrice>k__BackingField: 100
   <Prefab>k__BackingField: {fileID: 7381132652349608643, guid: a50416714fb15c7449a008674627c951, type: 3}
-  attack: 0
-  attackSpeed: 0
+  attack: 5
+  attackSpeed: 2
   criticalChance: 0
   criticalPercent: 0
-  range: 0
+  range: 5

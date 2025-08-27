@@ -10,6 +10,32 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
     [Header("Elements")]
     [SerializeField] private UpgradeContainer[] upgradeContainers;
     [SerializeField] private PlayerStatsManager playerStatsManager;
+    [SerializeField] private GameObject upgradeContainersParent;
+    public static WaveTransitionManager instance;
+
+    [Header("Player")]
+    [SerializeField] private PlayerObjects playerObjects;
+
+    [Header("Chest Related Stuff")]
+    [SerializeField] private ChestObjectContainer chestContainerPrefab;
+    [SerializeField] private Transform chestContainerParent;
+
+    [Header("Settings")]
+    private int chestCollected;
+
+    void Awake()
+    {
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
+
+        Chest.onCollected += ChestCollectedCallback;
+    }
+
+
+    private void OnDestroy()
+    {
+        Chest.onCollected -= ChestCollectedCallback;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,14 +53,56 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
         switch (gameState)
         {
             case GameState.WAVETRANSITION:
-                ConfigureUpgradeContainers();
+                TryOpenChest();
                 break;
         }
+    }
+
+    private void TryOpenChest()
+    {
+        // Xóa chest container UI (thẻ object cộng chỉ số) sau khi bấm nút Take (mở rương)
+        // Mỗi thẻ chest container sẽ tương ứng với 1 rương, nếu ko xóa chest container sẽ vẫn tồn tại mặc dù chỉ số đã đc cộng
+        chestContainerParent.Clear();
+
+        if (chestCollected > 0) ShowObject();
+        else ConfigureUpgradeContainers();
+    }
+
+    private void ShowObject()
+    {
+        chestCollected--;
+
+        upgradeContainersParent.SetActive(false);
+
+        ObjectDataSO[] objectDatas = ResourcesManager.Objects;
+        // Tạo một thẻ chứa object ngẫu nhiên trong folder Resources -> Data -> Objects
+        ObjectDataSO randomObjectData = objectDatas[Random.Range(0, objectDatas.Length)];
+
+        ChestObjectContainer containerInstance = Instantiate(chestContainerPrefab, chestContainerParent);
+        containerInstance.Configure(randomObjectData);
+
+        containerInstance.TakeButton.onClick.AddListener(() => TakeButtonCallback(randomObjectData));
+        containerInstance.RecycleButton.onClick.AddListener(() => RecycleButtonCallback(randomObjectData));
+    }
+
+    private void TakeButtonCallback(ObjectDataSO objectToTake)
+    {
+        playerObjects.AddObject(objectToTake);
+        // Tiếp tục mở các rương tiếp theo
+        TryOpenChest();
+    }
+
+    private void RecycleButtonCallback(ObjectDataSO objectToRecycle)
+    {
+        CurrencyManager.instance.AddCurrency(objectToRecycle.RecyclePrice);
+        // Tiếp tục mở các rương tiếp theo
+        TryOpenChest();
     }
 
     [Button]
     private void ConfigureUpgradeContainers()
     {
+        upgradeContainersParent.SetActive(true);
         for (int i = 0; i < upgradeContainers.Length; i++)
         {
             int randomIndex = Random.Range(0, Enum.GetValues(typeof(Stat)).Length);
@@ -121,5 +189,15 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
         }
 
         return () => playerStatsManager.AddPlayerStat(stat, value);
+    }
+
+    private void ChestCollectedCallback(Chest chest)
+    {
+        chestCollected++;
+    }
+
+    public bool HasCollectedChest()
+    {
+        return chestCollected > 0;
     }
 }

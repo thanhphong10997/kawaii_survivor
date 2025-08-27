@@ -39,7 +39,8 @@ public class GameManager : MonoBehaviour
 
     public void WaveCompletedCallback()
     {
-        if (Player.instance.HasLeveledUp())
+        // Check nếu player lên level hoặc nhặt được rương thì game state -> wave transition
+        if (Player.instance.HasLeveledUp() || WaveTransitionManager.instance.HasCollectedChest())
         {
             SetGameState(GameState.WAVETRANSITION);
         }

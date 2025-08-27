@@ -7,6 +7,7 @@ public class PlayerStatsManager : MonoBehaviour
     [Header("Data")]
     [SerializeField] private CharacterDataSO playerData;
     private Dictionary<Stat, float> addends = new Dictionary<Stat, float>();
+    private Dictionary<Stat, float> objectAddends = new Dictionary<Stat, float>();
     private Dictionary<Stat, float> playerStats = new Dictionary<Stat, float>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -14,9 +15,16 @@ public class PlayerStatsManager : MonoBehaviour
     {
         // Khởi tạo giá trị cho player Stats bằng giá trị đã khai báo ở property BaseStats
         playerStats = playerData.BaseStats;
-        foreach (KeyValuePair<Stat, float> kvp in playerStats) addends.Add(kvp.Key, 0);
+        foreach (KeyValuePair<Stat, float> kvp in playerStats)
+        {
+            addends.Add(kvp.Key, 0);
+            objectAddends.Add(kvp.Key, 0);
+        }
     }
-    void Start() => UpdatePlayerStats();
+    void Start()
+    {
+        UpdatePlayerStats();
+    }
 
     public void AddPlayerStat(Stat stat, float value)
     {
@@ -27,7 +35,16 @@ public class PlayerStatsManager : MonoBehaviour
         else Debug.LogError($"The key {stat} has not been found");
 
         UpdatePlayerStats();
+    }
 
+    public void AddObject(Dictionary<Stat, float> objectStats)
+    {
+        foreach (KeyValuePair<Stat, float> kvp in objectStats)
+        {
+            objectAddends[kvp.Key] += kvp.Value;
+        }
+
+        UpdatePlayerStats();
     }
 
     private void UpdatePlayerStats()
@@ -39,7 +56,7 @@ public class PlayerStatsManager : MonoBehaviour
         }
     }
 
-    public float GetStatValue(Stat stat) => playerStats[stat] + addends[stat];
+    public float GetStatValue(Stat stat) => playerStats[stat] + addends[stat] + objectAddends[stat];
 
 
 }

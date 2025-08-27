@@ -65,7 +65,7 @@ public class WeaponSelectionManager : MonoBehaviour, IGameStateListener
         // Khởi tạo level cho weapon
         int level = Random.Range(0, 4);
 
-        weaponContainerInstance.Configure(weaponData.Sprite, weaponData.Name, level, weaponData);
+        weaponContainerInstance.Configure(weaponData, level);
         weaponContainerInstance.Button.onClick.RemoveAllListeners();
         // Lý do thêm weaponContainerInstance để biết nút nào được nhấn, weaponData để truy cập text của weapon được nhấn
         weaponContainerInstance.Button.onClick.AddListener(() => WeaponSelectedCallback(weaponContainerInstance, weaponData, level));

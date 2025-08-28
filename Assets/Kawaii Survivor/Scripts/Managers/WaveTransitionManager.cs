@@ -108,12 +108,13 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
             int randomIndex = Random.Range(0, Enum.GetValues(typeof(Stat)).Length);
             Stat stat = (Stat)Enum.GetValues(typeof(Stat)).GetValue(randomIndex);
             string randomStatString = Enums.FormatStatName(stat);
+            Sprite upgradeSprite = ResourcesManager.GetStatIcon(stat);
 
             // Lấy TextMeshProUGUI component từ upgradeContainers sau đó gán giá trị text cho TextMeshProUGUI
             // upgradeContainers[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = randomStatString;
             string valueString;
             Action action = GetActionToPeform(stat, out valueString);
-            upgradeContainers[i].Configure(null, randomStatString, valueString);
+            upgradeContainers[i].Configure(upgradeSprite, randomStatString, valueString);
             // upgradeContainers[i].Button => tham chiếu đến phương thức Button của UpgradeContainer script
             // Xóa tất cả các listener có thể vô tình add vào nút này
             upgradeContainers[i].Button.onClick.RemoveAllListeners();
@@ -187,6 +188,9 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
                 Debug.Log("Invalid Stat");
                 break;
         }
+
+        // Hiển thị text kiểu: Critical + Enter + 5%
+        // valueString = Enums.FormatStatName(stat) + "\n" + valueString;
 
         return () => playerStatsManager.AddPlayerStat(stat, value);
     }

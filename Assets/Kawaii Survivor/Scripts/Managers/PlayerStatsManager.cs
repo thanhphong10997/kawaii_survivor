@@ -49,7 +49,7 @@ public class PlayerStatsManager : MonoBehaviour
 
     private void UpdatePlayerStats()
     {
-        IEnumerable<IPlayerStatsDependency> playerStatsDependencies = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IPlayerStatsDependency>();    // Kiểm tra nếu Object có type MonoBehaviour có thừa hưởng interface IPlayerStatsDependency
+        IEnumerable<IPlayerStatsDependency> playerStatsDependencies = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None).OfType<IPlayerStatsDependency>();    // Kiểm tra nếu Object có type MonoBehaviour có thừa hưởng interface IPlayerStatsDependency
         foreach (IPlayerStatsDependency dependency in playerStatsDependencies)
         {
             dependency.UpdateStats(this);

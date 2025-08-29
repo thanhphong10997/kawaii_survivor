@@ -13,7 +13,6 @@ public class WeaponSelectionContainer : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private Transform statContainersParent;
-    private WeaponDataSO weaponData;
 
     [Header("Color")]
     [SerializeField] private Image[] levelDependentImages;

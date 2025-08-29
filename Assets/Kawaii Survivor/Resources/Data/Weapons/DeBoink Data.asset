@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6564196810b9b243a28e220456c5c73, type: 3}
-  m_Name: Cotton Candy Gun Data
+  m_Name: DeBoink Data
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Cotton Candy Gun
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 84f07b27a38eda042b5858622cbeaf52, type: 3}
+  <Name>k__BackingField: DeBoink
+  <Sprite>k__BackingField: {fileID: 5485319108022510092, guid: 15c981701acaf3f4b840cf2f1f7d3446, type: 3}
   <PurchasePrice>k__BackingField: 100
-  <Prefab>k__BackingField: {fileID: 4123424468008324388, guid: df726886a79546848afa2bcfa3535529, type: 3}
-  attack: 10
-  attackSpeed: 2
+  <Prefab>k__BackingField: {fileID: 7381132652349608643, guid: a50416714fb15c7449a008674627c951, type: 3}
+  attack: 5
+  attackSpeed: 1
   criticalChance: 5
   criticalPercent: 1.5
-  range: 4
+  range: 3
